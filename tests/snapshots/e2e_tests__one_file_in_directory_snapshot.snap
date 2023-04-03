@@ -1,6 +1,6 @@
 ---
 source: tests/e2e_tests.rs
-assertion_line: 28
+assertion_line: 31
 expression: output_content
 ---
 tests/fixtures/one_file_in_directory/hello_word.md:

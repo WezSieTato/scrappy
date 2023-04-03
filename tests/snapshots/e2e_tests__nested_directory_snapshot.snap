@@ -1,0 +1,16 @@
+---
+source: tests/e2e_tests.rs
+assertion_line: 32
+expression: output_content
+---
+tests/fixtures/nested_directory/hello_word.md:
+```
+# Hello word!
+```
+
+tests/fixtures/nested_directory/nested/nested.md:
+```
+## Nested
+```
+
+

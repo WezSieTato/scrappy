@@ -1,8 +1,3 @@
----
-source: tests/e2e_tests.rs
-assertion_line: 31
-expression: output_content
----
 tests/fixtures/two_files_in_directory/first.md:
 ```
 # First file
@@ -12,5 +7,4 @@ tests/fixtures/two_files_in_directory/second.md:
 ```
 # Second file
 ```
-
 
