@@ -1,0 +1,11 @@
+---
+source: tests/e2e_tests.rs
+assertion_line: 29
+expression: output_content
+---
+tests/fixtures/input/hello_word.md:
+```
+# Hello word!
+```
+
+
