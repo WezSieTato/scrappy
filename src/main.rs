@@ -16,29 +16,34 @@ fn main() -> io::Result<()> {
 
     let mut file = File::create(output_file)?;
 
-    visit_dirs(Path::new(source_directory), &mut file)?;
+    let source_directory_path = Path::new(source_directory);
+    visit_dirs(source_directory_path, source_directory_path, &mut file)?;
 
     Ok(())
 }
 
-fn visit_dirs(dir: &Path, file: &mut File) -> io::Result<()> {
+fn visit_dirs(source_directory: &Path, dir: &Path, file: &mut File) -> io::Result<()> {
     if dir.is_dir() {
         for entry in fs::read_dir(dir)? {
             let entry = entry?;
             let path = entry.path();
             if path.is_dir() {
-                visit_dirs(&path, file)?;
+                visit_dirs(source_directory, &path, file)?;
             } else {
-                append_file_content(&path, file)?;
+                append_file_content(source_directory, &path, file)?;
             }
         }
     }
     Ok(())
 }
 
-fn append_file_content(file_path: &Path, output: &mut File) -> io::Result<()> {
+fn append_file_content(source_directory: &Path, file_path: &Path, output: &mut File) -> io::Result<()> {
     let content = fs::read_to_string(file_path)?;
-    writeln!(output, "{}:", file_path.to_string_lossy())?;
+
+    // Compute the relative path by removing the source directory prefix
+    let relative_path = file_path.strip_prefix(source_directory).unwrap_or(file_path);
+
+    writeln!(output, "{}:", relative_path.display())?;
     writeln!(output, "```")?;
     write!(output, "{}", content)?;
     writeln!(output, "```\n")?;
