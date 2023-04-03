@@ -1,10 +1,18 @@
+use std::env;
 use std::fs::{self, File};
 use std::io::{self, Write};
 use std::path::Path;
 
 fn main() -> io::Result<()> {
-    let source_directory = ".";
-    let output_file = "scrappy.txt";
+
+    let args: Vec<String> = env::args().collect();
+    if args.len() != 3 {
+        eprintln!("Usage: file_scraper <source_directory> <output_file>");
+        std::process::exit(1);
+    }
+
+    let source_directory = &args[1];
+    let output_file = &args[2];
 
     let mut file = File::create(output_file)?;
 
