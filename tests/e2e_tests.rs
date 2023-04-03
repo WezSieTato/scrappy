@@ -17,6 +17,7 @@ fn run_scrappy(source_directory: &str, output_file: &str) {
 #[test_case("one_file_in_directory")]
 #[test_case("two_files_in_directory")]
 #[test_case("nested_directory")]
+#[test_case("skipping_non_text_file")]
 fn test_scrappy(case_name: &str) {
     let output_file = format!("{}_output.md", case_name);
     let source_directory = format!("tests/fixtures/{}", case_name);

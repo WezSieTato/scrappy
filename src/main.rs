@@ -19,6 +19,8 @@ fn main() -> io::Result<()> {
     let source_directory_path = Path::new(source_directory);
     visit_dirs(source_directory_path, source_directory_path, &mut file)?;
 
+    println!("Scrappy finished successfully! Output file: {}", output_file);
+
     Ok(())
 }
 
@@ -38,15 +40,18 @@ fn visit_dirs(source_directory: &Path, dir: &Path, file: &mut File) -> io::Resul
 }
 
 fn append_file_content(source_directory: &Path, file_path: &Path, output: &mut File) -> io::Result<()> {
-    let content = fs::read_to_string(file_path)?;
-
-    // Compute the relative path by removing the source directory prefix
+    let content = fs::read(file_path)?;
     let relative_path = file_path.strip_prefix(source_directory).unwrap_or(file_path);
 
-    writeln!(output, "{}:", relative_path.display())?;
-    writeln!(output, "```")?;
-    write!(output, "{}", content)?;
-    writeln!(output, "```\n")?;
+    if let Ok(content_str) = String::from_utf8(content) {
+        println!("Scrapping file {}", relative_path.display());
+        writeln!(output, "{}:", relative_path.display())?;
+        writeln!(output, "```")?;
+        write!(output, "{}", content_str)?;
+        writeln!(output, "```\n")?;
+    } else {
+        println!("Skipping file {}", relative_path.display());
+    }
 
     Ok(())
 }
