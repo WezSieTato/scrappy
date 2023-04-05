@@ -1,9 +1,6 @@
 # Scrappy
 
-<p align="center">
-  <img src="logo.jpeg" alt="Scrappy Scrappy Doo">
-</p>
-
+![Scrappy Scrappy Doo.](logo.jpeg)
 
 Scrappy is a simple CLI tool that helps you collect and format code from a directory structure, making it easy to ask questions on platforms like ChatGPT by providing complete code context. With Scrappy, you can quickly generate a single Markdown file containing all the code from a module or project, so you don't have to manually copy and paste each file.
 
