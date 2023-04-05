@@ -63,7 +63,11 @@ cargo test
 
 ## Acknowledgements
 
-The first version of Scrappy, including this README, was generated with the help of ChatGPT, an AI language model developed by OpenAI.
+The first version of Scrappy, including this README, was generated with the help of ChatGPT, an AI language model developed by OpenAI. 
+
+The logo for Scrappy was generated using a text-to-image diffusion model called DALLE. 
+
+The prompt for the logo creation was also provided by ChatGPT.
 
 ## License
 
