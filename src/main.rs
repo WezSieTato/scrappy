@@ -1,4 +1,5 @@
 use clap::{App, Arg};
+use std::cmp::Ordering;
 use std::fs::{self, File};
 use std::io::{self, Write};
 use std::path::Path;
@@ -29,8 +30,17 @@ fn main() -> io::Result<()> {
 
 fn visit_dirs(source_directory: &Path, dir: &Path, file: &mut File, verbose: bool) -> io::Result<()> {
     if dir.is_dir() {
-        for entry in fs::read_dir(dir)? {
-            let entry = entry?;
+        let mut entries: Vec<fs::DirEntry> = fs::read_dir(dir)?
+            .map(|entry| entry.unwrap())
+            .collect();
+
+        entries.sort_by(|a, b| {
+            let a_path = a.path();
+            let b_path = b.path();
+            a_path.partial_cmp(&b_path).unwrap_or(Ordering::Equal)
+        });
+
+        for entry in entries {
             let path = entry.path();
             if path.is_dir() {
                 visit_dirs(source_directory, &path, file, verbose)?;
