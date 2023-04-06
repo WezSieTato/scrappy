@@ -17,10 +17,19 @@ Scrappy is a simple CLI tool that helps you collect and format code from a direc
 
 ## Installation
 
+### From source code
+
 To install Scrappy, make sure you have [Rust](https://www.rust-lang.org/tools/install) installed, and then run the following command:
 
 ```sh
 cargo install --path .
+```
+
+### Homebrew
+
+```sh
+brew tap WezSieTato/scrappy
+brew install scrappy
 ```
 
 ## Usage
